@@ -55,8 +55,5 @@ public class Enemy : MonoBehaviour
             nav.speed = startSpeed;
         }
     }
-    void Update()
-    {
-        enemyHealthBar.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-    }
+   
 }

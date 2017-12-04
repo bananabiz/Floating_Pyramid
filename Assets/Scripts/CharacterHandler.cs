@@ -18,7 +18,7 @@ public class CharacterHandler : MonoBehaviour
     #region Health
     //max and min health
     public float maxHealth, curHealth;
-    public GUIStyle healthbar;
+    public GUIStyle healthbar, mana, stamina;
     #endregion
 
     [Header("Levels and Exp")]
@@ -110,14 +110,14 @@ public class CharacterHandler : MonoBehaviour
         //GUI Box for current health that moves in same place as the background bar
         GUI.Box(new Rect(6 * scrW, 0.25f * scrH, curHealth * (4 * scrW) / maxHealth, 0.35f * scrH), ""); //moving health bar
         //current Health divided by the posistion on screen and timesed by the total max health
-        GUI.Box(new Rect(6 * scrW, 0.6f * scrH, 4 * scrW, 0.2f * scrH), "MP"); //background
+        GUI.Box(new Rect(6 * scrW, 0.6f * scrH, 4 * scrW, 0.2f * scrH), "MP", mana); //background
         //GUI Box on screen for the experience background
         //GUI Box for current experience that moves in same place as the background bar
         GUI.Box(new Rect(6 * scrW, 0.6f * scrH, curExp * (4 * scrW) / maxExp, 0.2f * scrH), ""); //moving exp bar
         //current Health divided by the position on screen and timesed by the total max health
         //current experience divided by the posistion on screen and timesed by the total max experience
         //GUI Draw Texture on the screen that has the mini map render texture attached
-        GUI.Box(new Rect(6 * scrW, 0.8f * scrH, 4 * scrW, 0.2f * scrH), "ST"); //background
+        GUI.Box(new Rect(6 * scrW, 0.8f * scrH, 4 * scrW, 0.2f * scrH), "ST", stamina); //background
         GUI.Box(new Rect(6 * scrW, 0.8f * scrH, curExp * (4 * scrW) / maxExp, 0.2f * scrH), ""); //moving exp bar
 
         GUI.DrawTexture(new Rect(13 * scrW, 0.25f * scrH, 2.925f * scrW, 2.5f * scrH), miniMap); //minimap Top view
