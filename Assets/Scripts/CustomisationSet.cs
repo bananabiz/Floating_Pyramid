@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CustomisationSet : MonoBehaviour
 {
     #region Variables
+    public GUIStyle buttonStyle;
 
     [Header("Texture List")]
     //Texture2D List for skin,hair, mouth, eyes
@@ -18,7 +19,8 @@ public class CustomisationSet : MonoBehaviour
 
     [Header("Index")]
     //index numbers for our current skin, hair, mouth, eyes textures
-    public int skinIndex, hairIndex, mouthIndex, eyesIndex, armourIndex, clothesIndex;
+    public int skinIndex;
+    public int hairIndex, mouthIndex, eyesIndex, armourIndex, clothesIndex;
 
     [Header("Renderer")]
     //renderer for our character mesh so we can reference a material list
@@ -26,17 +28,47 @@ public class CustomisationSet : MonoBehaviour
 
     [Header("Max Index")]
     //max amount of skin, hair, mouth, eyes textures that our lists are filling with
-    public int skinMax, hairMax, mouthMax, eyesMax, armourMax, clothesMax;
+    public int skinMax;
+    public int hairMax, mouthMax, eyesMax, armourMax, clothesMax;
 
     [Header("Character Name")]
     //name of our character that the user is making
     public string charName = "Adventurer";
+    
+    [Header("Character Class")]
+    public int Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma;
+    public int[] skillStats;
+    public string[] skillName = new string[6] { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
+    public int skillPoints = 10;
+    public string[] classSize;
+    public string classString = "Choose Class";
+    public string skillInfo;
+    public bool showClass = false;
+    public Vector2 scrollPosClass;
+    public GUIStyle chaClass;
+    public enum CharacterClass
+    {
+        None,
+        Bard, //Charisma 
+        Wizard, //Intelligence
+        Paladin,// Constitution
+        Ranger,//Dexterity
+        Fighter,//Strength
+        Monk //Wisdom
+    }
     #endregion
-
-    #region Start
-    //in start we need to set up the following
+    
     void Start()
     {
+        //text for class drop down button
+        classSize = new string[6];
+        classSize[0] = CharacterClass.Bard.ToString();
+        classSize[1] = CharacterClass.Wizard.ToString();
+        classSize[2] = CharacterClass.Paladin.ToString();
+        classSize[3] = CharacterClass.Ranger.ToString();
+        classSize[4] = CharacterClass.Fighter.ToString();
+        classSize[5] = CharacterClass.Monk.ToString();
+
         #region for loop to pull textures from file
         //for loop looping from 0 to less than the max amount of skin textures we need
         for (int i = 0; i < skinMax; i++)
@@ -95,10 +127,7 @@ public class CustomisationSet : MonoBehaviour
         SetTexture("Clothes", 0);
         #endregion
     }
-    #endregion
-
-
-    #region SetTexture
+   
     //Create a function that is called SetTexture it should contain a string and int
     //the string is the name of the material we are editing, the int is the direction we are changing
     void SetTexture(string type, int dir)
@@ -183,7 +212,6 @@ public class CustomisationSet : MonoBehaviour
         }
         #endregion
 
-
         #region OutSide Switch
         //outside our switch statement
         //index plus equals our direction
@@ -215,23 +243,14 @@ public class CustomisationSet : MonoBehaviour
                 skinIndex = index;
                 //break
                 break;
-            //case hair
             case "Hair":
-                //index equals our index
                 hairIndex = index;
-                //break
                 break;
-            //case mouth
             case "Mouth":
-                //index equals our index
                 mouthIndex = index;
-                //break
                 break;
-            //case eyes
             case "Eyes":
-                //index equals our index
                 eyesIndex = index;
-                //break
                 break;
 
             case "Armour":
@@ -243,12 +262,87 @@ public class CustomisationSet : MonoBehaviour
                 break;
         }
         #endregion
+       
     }
-    #endregion
 
+    void CharacterClassStats(string cClass)
+    {
+        string currentClass = cClass;
+        skillStats = new int[6]{Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma};
 
-    #region Save
-    //Function called Save this will allow us to save our indexes to PlayerPrefs
+        /* skillInfo = cClass + "\nStrength: " + Strength.ToString() + "\nDexterity: " + Dexterity.ToString()
+            + "\nConstitution: " + Constitution.ToString() + "\nIntelligence: " + Intelligence.ToString()
+            + "\nWisdom: " + Wisdom.ToString() + "\nCharisma: " + Charisma.ToString(); */
+
+        switch (currentClass)
+        {
+            case "Bard":
+                Strength = 3;
+                Dexterity = 5;
+                Constitution = 4;
+                Intelligence = 6;
+                Wisdom = 7;
+                Charisma = 8;
+                break;
+
+            case "Wizard":
+                Strength = 4;
+                Dexterity = 3;
+                Constitution = 5;
+                Intelligence = 8;
+                Wisdom = 7;
+                Charisma = 6;
+                break;
+
+            case "Paladin":
+                Strength = 7;
+                Dexterity = 6;
+                Constitution = 8;
+                Intelligence = 6;
+                Wisdom = 5;
+                Charisma = 5;
+                break;
+
+            case "Ranger":
+                Strength = 5;
+                Dexterity = 8;
+                Constitution = 5;
+                Intelligence = 5;
+                Wisdom = 6;
+                Charisma = 5;
+                break;
+
+            case "Fighter":
+                Strength = 8;
+                Dexterity = 6;
+                Constitution = 7;
+                Intelligence = 4;
+                Wisdom = 4;
+                Charisma = 3;
+                break;
+
+            case "Monk":
+                Strength = 3;
+                Dexterity = 5;
+                Constitution = 4;
+                Intelligence = 7;
+                Wisdom = 8;
+                Charisma = 5;
+                break;
+
+            default:
+                Strength = 0;
+                Dexterity = 0;
+                Constitution = 0;
+                Intelligence = 0;
+                Wisdom = 0;
+                Charisma = 0;
+                break;
+        }
+        
+    }
+
+    //Save indexes to PlayerPrefs
     void Save()
     {
         //SetInt for SkinIndex, HairIndex, MouthIndex, EyesIndex
@@ -261,10 +355,9 @@ public class CustomisationSet : MonoBehaviour
         //SetString CharacterName
         PlayerPrefs.SetString("CharacterName", charName);
     }
-    #endregion
 
-    #region OnGUI
-    //Function for our GUI elements
+    
+    //Function for GUI elements
     void OnGUI()
     {
         //create the floats scrW and scrH that govern our 16:9 ratio
@@ -275,15 +368,15 @@ public class CustomisationSet : MonoBehaviour
 
         #region Skin
         //GUI button on the left of the screen with the contence <
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  -1
             SetTexture("Skin", -1);
         }
         //GUI Box or Lable on the left of the screen with the contence Skin
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Skin");
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Skin", buttonStyle);
         //GUI button on the left of the screen with the contence >
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  1
             SetTexture("Skin", 1);
@@ -295,15 +388,15 @@ public class CustomisationSet : MonoBehaviour
         //set up same things for Hair, Mouth and Eyes
         #region Hair
         //GUI button on the left of the screen with the contence <
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Material and move the texture index in the direction  -1
             SetTexture("Hair", -1);
         }
         //GUI Box or Lable on the left of the screen with the contence material Name
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Hair");
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Hair", buttonStyle);
         //GUI button on the left of the screen with the contence >
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the  Material and move the texture index in the direction  1
             SetTexture("Hair", 1);
@@ -313,12 +406,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Mouth
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Mouth", -1);
         }
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Mouth");
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Mouth", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Mouth", 1);
         }
@@ -326,12 +419,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Eyes
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Eyes", -1);
         }
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Eyes");
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Eyes", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Eyes", 1);
         }
@@ -339,12 +432,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Armour
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Armour", -1);
         }
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Armour");
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Armour", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Armour", 1);
         }
@@ -352,12 +445,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Clothes
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Clothes", -1);
         }
-        GUI.Box(new Rect(0.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Clothes");
-        if (GUI.Button(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">"))
+        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Clothes", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Clothes", 1);
         }
@@ -367,7 +460,7 @@ public class CustomisationSet : MonoBehaviour
         #region Random Reset
         //create 2 buttons one Random and one Reset
         //Random will feed a random amount to the direction 
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Random"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Random", buttonStyle))
         {
             SetTexture("Skin", Random.Range(0, skinMax - 1));
             SetTexture("Hair", Random.Range(0, hairMax - 1));
@@ -378,7 +471,7 @@ public class CustomisationSet : MonoBehaviour
         }
 
         //reset will set all to 0 both use SetTexture
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset"))
+        if (GUI.Button(new Rect(2.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset", buttonStyle))
         {
             SetTexture("Skin", skinIndex = 0);
             SetTexture("Hair", hairIndex = 0);
@@ -393,17 +486,104 @@ public class CustomisationSet : MonoBehaviour
 
         #region Character Name and Save & Play
         //name of our character equals a GUI TextField that holds our character name and limit of characters
-        charName = GUI.TextField(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), charName, 12);
+        charName = GUI.TextField(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), charName, 12, buttonStyle);
         //move down the screen with the int using ++ each grouping of GUI elements are moved using this
         i++;
         //GUI Button called Save and Play
-        if (GUI.Button(new Rect(0.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), "Save & Play"))
+        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), "Save & Play", buttonStyle))
         {
             //this button will run the save function and also load into the game level
             Save();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         #endregion
+
+        #region Dropdown Character Classes
+
+        CharacterClassStats(classString);
+        //display character classes
+        for (int sSize = 0; sSize < skillName.Length; sSize++)
+        {
+            GUI.Box(new Rect(12f * scrW, 1f * scrH + sSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), skillName[sSize] + ": " + skillStats[sSize].ToString(), chaClass);
+        }
+        
+        #region add skill points on Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma
+        
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 0 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Strength < 10) && (Strength != 0))
+        {
+            skillStats[0]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 1 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Dexterity < 10) && (Dexterity != 0))
+        {
+            skillStats[1]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 2 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Constitution < 10) && (Constitution != 0))
+        {
+            skillStats[2]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 3 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Intelligence < 10) && (Intelligence != 0))
+        {
+            skillStats[3]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 4 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Wisdom < 10) && (Wisdom != 0))
+        {
+            skillStats[4]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 5 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Charisma < 10) && (Charisma != 0))
+        {
+            skillStats[5]++;
+            skillPoints--;
+            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+        }
+        #endregion
+
+        //show skillpoints
+        GUI.Box(new Rect(12f * scrW, 4.25f * scrH, 2.25f * scrW, 0.5f * scrH), skillPoints.ToString()+" Skill Points to add", chaClass);
+
+        //dropdown button
+        if (GUI.Button(new Rect(12f * scrW, 5 * scrH, 1.75f * scrW, 0.5f * scrH), classString, chaClass))
+        {
+            //toggle on and off dropdown
+            showClass = !showClass;
+        }
+        if (showClass)
+        {
+            GUI.Box(new Rect(12f * scrW, 5 * scrH, 1.75f * scrW, 0.5f * scrH), "", chaClass);
+            //open a scroll view
+            scrollPosClass = GUI.BeginScrollView(new Rect(12f * scrW, 5.5f * scrH, 1.75f * scrW, 3 * scrH), scrollPosClass, new Rect(0, 0, 1.75f * scrW, 3f * scrH));
+
+            for (int claSize = 0; claSize < classSize.Length; claSize++)
+            {
+                if (GUI.Button(new Rect(0f * scrW, 0 * scrH + claSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), classSize[claSize], chaClass))
+                {
+                    //behaviour goes here
+                    classString = classSize[claSize];
+
+                    //turn off the drop down
+                    showClass = false;
+
+                }
+            }
+            //the end of scroll view
+            GUI.EndScrollView();
+            
+        }
+        
+        #endregion
     }
 }
-    #endregion

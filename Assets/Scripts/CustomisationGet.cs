@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//you will need to change Scenes
+
 using UnityEngine.SceneManagement;
 
 public class CustomisationGet : MonoBehaviour
@@ -28,7 +28,7 @@ public class CustomisationGet : MonoBehaviour
         if (!PlayerPrefs.HasKey("CharacterName"))
         {
             //if it doesnt then load the CustomSet level
-            SceneManager.LoadScene("Character");
+            SceneManager.LoadScene("CharacterSettings");
         }
         else
         {

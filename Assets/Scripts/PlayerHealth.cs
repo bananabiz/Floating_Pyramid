@@ -22,11 +22,11 @@ public class PlayerHealth : MonoBehaviour
         
 	}
 
-    void OnCollisionEnter(Collider enemy)
-    {
-        if (enemy.gameObject.tag == "Enemy")
-        {
-            currentHealth -= enemy.attackDamage;
-        }
-    }
+    //void OnCollisionEnter(Collider enemy)
+    //{
+    //    if (enemy.gameObject.tag == "Enemy")
+    //    {
+    //        currentHealth -= enemy.attackDamage;
+    //    }
+    //}
 }
