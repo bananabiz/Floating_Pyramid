@@ -1,36 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
-//this script can be found in the Component section under the option Character Set Up 
-//Interact
+
 [AddComponentMenu("Character Set Up / Interact")]
 public class PickUp : MonoBehaviour 
 {
-    #region Variables
-    //We are setting up these variable and the tags in update for week 3,4 and 5
-
     [Header("Player and Camera connection")]
     //create two gameobject variables one called player and the other mainCam
     public GameObject player;
     public GameObject mainCam;
-    #endregion
 
-    #region Start
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //connect our player to the player variable via tag
+        //connect player to the player variable via tag
         player = GameObject.FindGameObjectWithTag("Player");
-        //connect our Camera to the mainCam variable via tag
+        //connect Camera to the mainCam variable via tag
         mainCam = this.gameObject; 
     }
-    #endregion
 
-    #region Update
     void Update()
     {
         //if our interact key is pressed
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButtonDown("Fire2"))
         {
             //create a ray
             Ray interact;
@@ -71,7 +63,6 @@ public class PickUp : MonoBehaviour
             }
         }
     }
-	#endregion
 }
 
 

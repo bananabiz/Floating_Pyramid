@@ -5,7 +5,7 @@ using System.Collections;
     [RequireComponent(typeof(AIAgent))]
     public class SteeringBehaviour : MonoBehaviour
     {
-        public float weighting = 7.5f;
+        public float weighting = 8f;
         [HideInInspector]
         public AIAgent owner;
 

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimerClockHardCode : MonoBehaviour {
 
     public float timer; //set this to the time you want in seconds + 1 second for PC load Start
+    public GUIStyle clock;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,10 @@ public class TimerClockHardCode : MonoBehaviour {
         {
             timer -= Time.deltaTime; //count down... this may take us below 0
 
+        }
+        if (timer == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 	}
 
@@ -40,7 +46,7 @@ public class TimerClockHardCode : MonoBehaviour {
         int mins = Mathf.FloorToInt(timer / 60);
         int secs = Mathf.FloorToInt(timer - mins * 60);
         string clockTime = string.Format("{0:0}:{1:00}", mins, secs);
-        GUI.Box(new Rect(scrW, scrH, scrW, scrH), clockTime); //displaying our clock
+        GUI.Box(new Rect(8.5f * scrW, 0.25f * scrH, 1.2f * scrW, 0.4f * scrH), clockTime, clock); //displaying our clock
     }
 
 }

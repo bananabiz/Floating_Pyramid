@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
 {
     [Header("Base Enemy Stats")]
     public float startSpeed = 3;
-    public float startHealth = 70;
-    public int loot = 15;
+    public float startHealth = 50;
+    public int damage = 20;
     public NavMeshAgent nav;
     public Image healthBar;
     public GameObject enemyHealthBar;
@@ -20,12 +20,14 @@ public class Enemy : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
     }
+
     protected void Start()
     {
         health = startHealth;
         nav.speed = startSpeed;
     }
-    public void TakeDamage(float damage)
+
+    public void TakeDamage(int damage)
     {
         health -= damage;
 
@@ -36,12 +38,13 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
+
     protected virtual void Die()
     {
-        
         isDead = true;
         Destroy(gameObject);
     }
+
     public IEnumerator Slow(float slow, int slowTime)
     {
         nav.speed = startSpeed * (1f - slow);

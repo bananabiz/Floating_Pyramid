@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 //this script can be found in the Component section under the option Character Set Up 
 //Character Handler
 [AddComponentMenu("Character Set Up / Character Handler")]
@@ -11,6 +12,7 @@ public class CharacterHandler : MonoBehaviour
     public bool alive;
     //connection to players character controller
     public CharacterController controller;
+    public int attackDamage;
 
     [Header("Health")]
     //max and min health
@@ -78,6 +80,18 @@ public class CharacterHandler : MonoBehaviour
             level++;
             //the maximum amount of experience is increased by 50
             maxExp += 50;
+        }
+
+        if (curHealth < 0)
+        {
+            curHealth = 0;
+            Debug.Log("You are dead~~ " + "Press Fire1 to replay.");
+            Time.timeScale = 0;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
     

@@ -512,9 +512,9 @@ public class CustomisationSet : MonoBehaviour
 
         CharacterClassStats(classString);
         //display character skills
-        for (int sSize = 0; sSize < skillName.Length; sSize++)
+        for (int skSize = 0; skSize < skillName.Length; skSize++)
         {
-            GUI.Box(new Rect(12f * scrW, 1f * scrH + sSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), skillName[sSize] + ": " + skillStats[sSize].ToString(), chaClass);
+            GUI.Box(new Rect(12f * scrW, 1f * scrH + skSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), skillName[skSize] + ": " + skillStats[skSize].ToString(), chaClass);
         }
         
         #region add skill points on Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma
