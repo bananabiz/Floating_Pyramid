@@ -519,42 +519,42 @@ public class CustomisationSet : MonoBehaviour
         
         #region add skill points on Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma
         
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 0 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Strength < 10) && (Strength != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 0 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Strength < 10) && (Strength != 0) && skillPoints > 0)
         {
             skillStats[0]++;
             skillPoints--;
             Debug.Log("Character changed to Bard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 1 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Dexterity < 10) && (Dexterity != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 1 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Dexterity < 10) && (Dexterity != 0) && skillPoints > 0)
         {
             skillStats[1]++;
             skillPoints--;
             Debug.Log("Character changed to Wizard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 2 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Constitution < 10) && (Constitution != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 2 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Constitution < 10) && (Constitution != 0) && skillPoints > 0)
         {
             skillStats[2]++;
             skillPoints--;
             Debug.Log("Character changed to Paladin. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 3 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Intelligence < 10) && (Intelligence != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 3 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Intelligence < 10) && (Intelligence != 0) && skillPoints > 0)
         {
             skillStats[3]++;
             skillPoints--;
             Debug.Log("Character changed to Ranger. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 4 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Wisdom < 10) && (Wisdom != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 4 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Wisdom < 10) && (Wisdom != 0) && skillPoints > 0)
         {
             skillStats[4]++;
             skillPoints--;
             Debug.Log("Character changed to Fighter. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
-        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 5 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Charisma < 10) && (Charisma != 0))
+        if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 5 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Charisma < 10) && (Charisma != 0) && skillPoints > 0)
         {
             skillStats[5]++;
             skillPoints--;
