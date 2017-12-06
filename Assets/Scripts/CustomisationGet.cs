@@ -10,6 +10,8 @@ public class CustomisationGet : MonoBehaviour
     [Header("Character")]
     //public variable for the Skinned Mesh Renderer which is our character reference
     public Renderer character;
+    private string characterClass;
+    private int Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma;
 
     #region Start
     void Start()
@@ -40,7 +42,21 @@ public class CustomisationGet : MonoBehaviour
             SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"));
             SetTexture("Clothes", PlayerPrefs.GetInt("ClothesIndex"));
             //grab the gameObject in scene that is our character and set its Object name to the Characters name
-            gameObject.name = PlayerPrefs.GetString("CharacterName"); 
+            gameObject.name = PlayerPrefs.GetString("CharacterName");
+            //get character class
+            characterClass = PlayerPrefs.GetString("CharacterClass");
+            //get character skills stats
+            Strength = PlayerPrefs.GetInt("Strength");
+            Dexterity = PlayerPrefs.GetInt("Dexterity");
+            Constitution = PlayerPrefs.GetInt("Constitution");
+            Intelligence = PlayerPrefs.GetInt("Intelligence");
+            Wisdom = PlayerPrefs.GetInt("Wisdom");
+            Charisma = PlayerPrefs.GetInt("Charisma");
+
+            Debug.Log(gameObject.name + "  " + characterClass);
+            Debug.Log("Strength:" + Strength.ToString() + "  Dexterity:" + Dexterity.ToString() 
+                + "  Constitution:" + Constitution.ToString() + "  Intelligence:" + Intelligence.ToString() 
+                + "  Wisdom:" + Wisdom.ToString() + "  Charisma:" + Charisma.ToString());
         }
     }
     #endregion

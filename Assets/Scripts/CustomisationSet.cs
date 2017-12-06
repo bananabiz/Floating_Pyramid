@@ -43,6 +43,7 @@ public class CustomisationSet : MonoBehaviour
     public string[] classSize;
     public string classString = "Choose Class";
     public string skillInfo;
+    string currentClass;
     public bool showClass = false;
     public Vector2 scrollPosClass;
     public GUIStyle chaClass;
@@ -267,7 +268,7 @@ public class CustomisationSet : MonoBehaviour
 
     void CharacterClassStats(string cClass)
     {
-        string currentClass = cClass;
+        currentClass = cClass;
         skillStats = new int[6]{Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma};
 
         /* skillInfo = cClass + "\nStrength: " + Strength.ToString() + "\nDexterity: " + Dexterity.ToString()
@@ -354,6 +355,15 @@ public class CustomisationSet : MonoBehaviour
         PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
         //SetString CharacterName
         PlayerPrefs.SetString("CharacterName", charName);
+        //Save string for character class
+        PlayerPrefs.SetString("CharacterClass", currentClass);
+        //Save skills stats
+        PlayerPrefs.SetInt("Strength", Strength);
+        PlayerPrefs.SetInt("Dexterity", Dexterity);
+        PlayerPrefs.SetInt("Constitution", Constitution);
+        PlayerPrefs.SetInt("Intelligence", Intelligence);
+        PlayerPrefs.SetInt("Wisdom", Wisdom);
+        PlayerPrefs.SetInt("Charisma", Charisma);
     }
 
     
@@ -501,7 +511,7 @@ public class CustomisationSet : MonoBehaviour
         #region Dropdown Character Classes
 
         CharacterClassStats(classString);
-        //display character classes
+        //display character skills
         for (int sSize = 0; sSize < skillName.Length; sSize++)
         {
             GUI.Box(new Rect(12f * scrW, 1f * scrH + sSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), skillName[sSize] + ": " + skillStats[sSize].ToString(), chaClass);
@@ -513,49 +523,49 @@ public class CustomisationSet : MonoBehaviour
         {
             skillStats[0]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Bard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 1 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Dexterity < 10) && (Dexterity != 0))
         {
             skillStats[1]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Wizard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 2 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Constitution < 10) && (Constitution != 0))
         {
             skillStats[2]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Paladin. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 3 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Intelligence < 10) && (Intelligence != 0))
         {
             skillStats[3]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Ranger. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 4 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Wisdom < 10) && (Wisdom != 0))
         {
             skillStats[4]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Fighter. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
 
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 5 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Charisma < 10) && (Charisma != 0))
         {
             skillStats[5]++;
             skillPoints--;
-            Debug.Log(skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Monk. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
         #endregion
 
         //show skillpoints
         GUI.Box(new Rect(12f * scrW, 4.25f * scrH, 2.25f * scrW, 0.5f * scrH), skillPoints.ToString()+" Skill Points to add", chaClass);
 
-        //dropdown button
+        //dropdown button show character classes
         if (GUI.Button(new Rect(12f * scrW, 5 * scrH, 1.75f * scrW, 0.5f * scrH), classString, chaClass))
         {
             //toggle on and off dropdown
