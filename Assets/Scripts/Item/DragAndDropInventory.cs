@@ -11,6 +11,7 @@ public class DragAndDropInventory : MonoBehaviour
     public List<Item> inventory = new List<Item>();
     public int slotX, slotY;
     private Rect inventorySize;
+    public GUIStyle invent;
     [Header("Dragging")]
     public bool dragging;
     public Item draggedItem;
@@ -93,8 +94,8 @@ public class DragAndDropInventory : MonoBehaviour
     #region Drag Inventory
     void InventoryDrag(int windowID)
     {
-        GUI.Box(new Rect(0, 0.25f * scrH, 6 * scrW, 0.5f * scrH), "Banner");
-        GUI.Box(new Rect(0, 4.25f * scrH, 6 * scrW, 0.5f * scrH), "Gold n EXP");
+        GUI.Box(new Rect(0, 0.25f * scrH, 6 * scrW, 0.5f * scrH), "Banner", invent);
+        GUI.Box(new Rect(0, 4.25f * scrH, 6 * scrW, 0.5f * scrH), "Gold n EXP", invent);
         showToolTip = false;
         #region Nested For Loop
         Event e = Event.current;
@@ -232,7 +233,7 @@ public class DragAndDropInventory : MonoBehaviour
         #region Draw Inventory if showInv is true
         if (showInv)
         {
-            inventorySize = ClampToScreen(GUI.Window(1, inventorySize, InventoryDrag, "My Inventory"));
+            inventorySize = ClampToScreen(GUI.Window(1, inventorySize, InventoryDrag, "My Inventory", invent));
         }
         #endregion
         #region Draw ToolTip

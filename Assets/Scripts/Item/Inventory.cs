@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     [Header("Inventory")]
     public List<Item> inv = new List<Item>();
     public Item selectedItem;
+    public GUIStyle invent;
 
     [Header("Bools and Values")]
     public bool showInv;
@@ -108,7 +109,7 @@ public class Inventory : MonoBehaviour
             float scrH = Screen.height / 9;
 
             //Background labled Inventory
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Inventory");
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Inventory", invent);
             // if we have less than or 35 items then no scroll view
             if (inv.Count <= 35)
             {
