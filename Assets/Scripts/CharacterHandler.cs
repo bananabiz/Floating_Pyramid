@@ -40,7 +40,10 @@ public class CharacterHandler : MonoBehaviour
     //render texture for the mini map that we need to connect to a camera
     public RenderTexture miniMap;
     public RenderTexture faceMiniMap;
-    
+
+    [Header("You Dead Canvas")]
+    public GameObject youDead;
+
     void Start()
     {
         //set max health to 100
@@ -85,13 +88,10 @@ public class CharacterHandler : MonoBehaviour
         if (curHealth < 0)
         {
             curHealth = 0;
-            Debug.Log("You are dead~~ " + "Press Fire1 to replay.");
             Time.timeScale = 0;
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Time.timeScale = 1;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            youDead.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     

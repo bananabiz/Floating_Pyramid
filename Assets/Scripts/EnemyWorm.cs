@@ -4,5 +4,19 @@ using UnityEngine;
 
 public class EnemyWorm : Enemy
 {
+    public Animator anim;
 
+    protected override void Start()
+    {
+        base.Start();
+        anim = GetComponent<Animator>();
+    }
+
+    protected override void Die()
+    {
+        // Animate the spider
+        anim.SetBool("wormDead", true);
+
+        base.Die();
+    }
 }

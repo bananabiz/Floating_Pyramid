@@ -8,6 +8,13 @@ using System.Collections;
         // Public:
         public Transform target;
         public float stoppingDistance = 0f;
+        private GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
+    }
 
         public override Vector3 GetForce()
         {

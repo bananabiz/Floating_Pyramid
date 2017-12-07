@@ -127,6 +127,10 @@ public class CustomisationSet : MonoBehaviour
         SetTexture("Armour", 0);
         SetTexture("Clothes", 0);
         #endregion
+
+
+        // Changes character class
+        CharacterClassStats(classString);
     }
    
     //Create a function that is called SetTexture it should contain a string and int
@@ -269,7 +273,6 @@ public class CustomisationSet : MonoBehaviour
     void CharacterClassStats(string cClass)
     {
         currentClass = cClass;
-        skillStats = new int[6]{Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma};
 
         /* skillInfo = cClass + "\nStrength: " + Strength.ToString() + "\nDexterity: " + Dexterity.ToString()
             + "\nConstitution: " + Constitution.ToString() + "\nIntelligence: " + Intelligence.ToString()
@@ -340,7 +343,9 @@ public class CustomisationSet : MonoBehaviour
                 Charisma = 0;
                 break;
         }
-        
+
+
+        skillStats = new int[6] { Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma };
     }
 
     //Save indexes to PlayerPrefs
@@ -378,15 +383,15 @@ public class CustomisationSet : MonoBehaviour
 
         #region Skin
         //GUI button on the left of the screen with the contence <
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f *scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  -1
             SetTexture("Skin", -1);
         }
         //GUI Box or Lable on the left of the screen with the contence Skin
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Skin", buttonStyle);
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Skin", buttonStyle);
         //GUI button on the left of the screen with the contence >
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Skin Material and move the texture index in the direction  1
             SetTexture("Skin", 1);
@@ -398,15 +403,15 @@ public class CustomisationSet : MonoBehaviour
         //set up same things for Hair, Mouth and Eyes
         #region Hair
         //GUI button on the left of the screen with the contence <
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the Material and move the texture index in the direction  -1
             SetTexture("Hair", -1);
         }
         //GUI Box or Lable on the left of the screen with the contence material Name
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Hair", buttonStyle);
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Hair", buttonStyle);
         //GUI button on the left of the screen with the contence >
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             //when pressed the button will run SetTexture and grab the  Material and move the texture index in the direction  1
             SetTexture("Hair", 1);
@@ -416,12 +421,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Mouth
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Mouth", -1);
         }
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Mouth", buttonStyle);
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Mouth", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Mouth", 1);
         }
@@ -429,12 +434,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Eyes
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Eyes", -1);
         }
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Eyes", buttonStyle);
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Eyes", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Eyes", 1);
         }
@@ -442,12 +447,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Armour
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Armour", -1);
         }
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Armour", buttonStyle);
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Armour", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Armour", 1);
         }
@@ -455,12 +460,12 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Clothes
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), "<", buttonStyle))
         {
             SetTexture("Clothes", -1);
         }
-        GUI.Box(new Rect(1.75f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Clothes", buttonStyle);
-        if (GUI.Button(new Rect(2.75f * scrW, scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
+        GUI.Box(new Rect(1.75f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Clothes", buttonStyle);
+        if (GUI.Button(new Rect(2.75f * scrW, 2f * scrH + i * (0.5f * scrH), 0.5f * scrW, 0.5f * scrH), ">", buttonStyle))
         {
             SetTexture("Clothes", 1);
         }
@@ -470,7 +475,7 @@ public class CustomisationSet : MonoBehaviour
         #region Random Reset
         //create 2 buttons one Random and one Reset
         //Random will feed a random amount to the direction 
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Random", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Random", buttonStyle))
         {
             SetTexture("Skin", Random.Range(0, skinMax - 1));
             SetTexture("Hair", Random.Range(0, hairMax - 1));
@@ -481,7 +486,7 @@ public class CustomisationSet : MonoBehaviour
         }
 
         //reset will set all to 0 both use SetTexture
-        if (GUI.Button(new Rect(2.25f * scrW, scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset", buttonStyle))
+        if (GUI.Button(new Rect(2.25f * scrW, 2f * scrH + i * (0.5f * scrH), scrW, 0.5f * scrH), "Reset", buttonStyle))
         {
             SetTexture("Skin", skinIndex = 0);
             SetTexture("Hair", hairIndex = 0);
@@ -496,11 +501,11 @@ public class CustomisationSet : MonoBehaviour
 
         #region Character Name and Save & Play
         //name of our character equals a GUI TextField that holds our character name and limit of characters
-        charName = GUI.TextField(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), charName, 12, buttonStyle);
+        charName = GUI.TextField(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), charName, 12, buttonStyle);
         //move down the screen with the int using ++ each grouping of GUI elements are moved using this
         i++;
         //GUI Button called Save and Play
-        if (GUI.Button(new Rect(1.25f * scrW, scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), "Save & Play", buttonStyle))
+        if (GUI.Button(new Rect(1.25f * scrW, 2f * scrH + i * (0.5f * scrH), 2 * scrW, 0.5f * scrH), "Save & Play", buttonStyle))
         {
             //this button will run the save function and also load into the game level
             Save();
@@ -509,56 +514,54 @@ public class CustomisationSet : MonoBehaviour
         #endregion
 
         #region Dropdown Character Classes
-
-        CharacterClassStats(classString);
         //display character skills
         for (int skSize = 0; skSize < skillName.Length; skSize++)
         {
             GUI.Box(new Rect(12f * scrW, 1f * scrH + skSize * (scrH * 0.5f), 1.75f * scrW, 0.5f * scrH), skillName[skSize] + ": " + skillStats[skSize].ToString(), chaClass);
         }
-        
+
         #region add skill points on Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma
-        
+        //Strength
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 0 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Strength < 10) && (Strength != 0) && skillPoints > 0)
         {
             skillStats[0]++;
             skillPoints--;
             Debug.Log("Character changed to Bard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
-
+        //Dexterity
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 1 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Dexterity < 10) && (Dexterity != 0) && skillPoints > 0)
         {
             skillStats[1]++;
             skillPoints--;
-            Debug.Log("Character changed to Wizard. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Wizard. " + skillStats[1].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
-
+        //Constitution
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 2 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Constitution < 10) && (Constitution != 0) && skillPoints > 0)
         {
             skillStats[2]++;
             skillPoints--;
-            Debug.Log("Character changed to Paladin. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Paladin. " + skillStats[2].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
-
+        //Intelligence
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 3 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Intelligence < 10) && (Intelligence != 0) && skillPoints > 0)
         {
             skillStats[3]++;
             skillPoints--;
-            Debug.Log("Character changed to Ranger. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Ranger. " + skillStats[3].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
-
+        //Wisdom
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 4 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Wisdom < 10) && (Wisdom != 0) && skillPoints > 0)
         {
             skillStats[4]++;
             skillPoints--;
-            Debug.Log("Character changed to Fighter. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Fighter. " + skillStats[4].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
-
+        //Charisma
         if ((GUI.Button(new Rect(13.75f * scrW, 1f * scrH + 5 * (scrH * 0.5f), 0.5f * scrW, 0.5f * scrH), "+", chaClass)) && (Charisma < 10) && (Charisma != 0) && skillPoints > 0)
         {
             skillStats[5]++;
             skillPoints--;
-            Debug.Log("Character changed to Monk. " + skillStats[0].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
+            Debug.Log("Character changed to Monk. " + skillStats[5].ToString() + "; " + Strength.ToString() + "; " + skillPoints);
         }
         #endregion
 
@@ -583,10 +586,12 @@ public class CustomisationSet : MonoBehaviour
                 {
                     //behaviour goes here
                     classString = classSize[claSize];
-
+                    
                     //turn off the drop down
                     showClass = false;
 
+                    // Changes character class
+                    CharacterClassStats(classString);
                 }
             }
             //the end of scroll view

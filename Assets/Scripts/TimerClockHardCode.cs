@@ -6,33 +6,44 @@ using UnityEngine.SceneManagement;
 public class TimerClockHardCode : MonoBehaviour {
 
     public float timer; //set this to the time you want in seconds + 1 second for PC load Start
+    public float timerCount;
     public GUIStyle clock;
+    public GameObject player;
+    public GameObject youDead;
+    private CharacterHandler playerCH;
 
-	// Use this for initialization
-	void Start () {
-
+    // Use this for initialization
+    void Start ()
+    {
+        youDead.SetActive(false);
         Time.timeScale = 1;
-	}
+        playerCH = player.GetComponent<CharacterHandler>();
+        timerCount = timer;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (timer > 0) //if we are greater than 0
+        if (timerCount > 0) //if we are greater than 0
         {
-            timer -= Time.deltaTime; //count down... this may take us below 0
+            timerCount -= Time.deltaTime; //count down... this may take us below 0
 
         }
-        if (timer == 0)
+        if (timerCount == 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            playerCH.curHealth = 0;
+            youDead.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
         }
 	}
 
     void LateUpdate()
     {
-        if (timer < 0)
+        if (timerCount < 0)
         {
-            timer = 0; //so this sets us back to 0
+            timerCount = 0; //sets timecount back to 0
         }
 
     }
@@ -43,8 +54,8 @@ public class TimerClockHardCode : MonoBehaviour {
         float scrW = Screen.width / 16;
         float scrH = Screen.height / 9;
 
-        int mins = Mathf.FloorToInt(timer / 60);
-        int secs = Mathf.FloorToInt(timer - mins * 60);
+        int mins = Mathf.FloorToInt(timerCount / 60);
+        int secs = Mathf.FloorToInt(timerCount - mins * 60);
         string clockTime = string.Format("{0:0}:{1:00}", mins, secs);
         GUI.Box(new Rect(8.5f * scrW, 0.25f * scrH, 1.2f * scrW, 0.4f * scrH), clockTime, clock); //displaying our clock
     }

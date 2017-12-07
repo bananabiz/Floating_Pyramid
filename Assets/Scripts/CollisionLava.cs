@@ -6,11 +6,15 @@ public class CollisionLava : MonoBehaviour
 {
     public Transform playerSpawn;
     public GameObject player;
+    public GameObject youDead;
+    public GameObject timer;
+    private TimerClockHardCode startTime;
     private CharacterHandler playerCH;
 
     private void Awake()
     {
         playerCH = player.GetComponent<CharacterHandler>();
+        startTime = timer.GetComponent<TimerClockHardCode>();
     }
 
     void OnCollisionEnter(Collision col)
@@ -18,13 +22,25 @@ public class CollisionLava : MonoBehaviour
 
         if (col.gameObject.tag == "Player")
         {
-            col.transform.position = playerSpawn.position;
-            playerCH.curHealth = 100;
-            print("You die!");
+            playerCH.curHealth = 0;
+            youDead.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            print("You are dead!");
         }
         else
         {
             print("Something hit me!");
         }
+    }
+
+    public void Reborn()
+    {
+        Time.timeScale = 1;
+        youDead.SetActive(false);
+        startTime.timerCount = startTime.timer;
+        playerCH.curHealth = playerCH.maxHealth;
+        player.transform.position = playerSpawn.position;
     }
 }
