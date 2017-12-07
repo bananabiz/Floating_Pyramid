@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //slow down enemy movement
     public IEnumerator Slow(float slow, int slowTime)
     {
         nav.speed = startSpeed * (1f - slow);
