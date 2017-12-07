@@ -8,6 +8,7 @@ public class PickUp : MonoBehaviour
     //create two gameobject variables one called player and the other mainCam
     public GameObject player;
     public GameObject mainCam;
+    private CharacterHandler playerCH;
 
     void Start()
     {
@@ -16,7 +17,9 @@ public class PickUp : MonoBehaviour
         //connect player to the player variable via tag
         player = GameObject.FindGameObjectWithTag("Player");
         //connect Camera to the mainCam variable via tag
-        mainCam = this.gameObject; 
+        mainCam = this.gameObject;
+
+        playerCH = this.GetComponent<CharacterHandler>();
     }
 
     void Update()
@@ -31,7 +34,7 @@ public class PickUp : MonoBehaviour
             //create hit info
             RaycastHit hitInfo;
             //if this physics raycast hits something within 10 units
-            if (Physics.Raycast(interact, out hitInfo, 10))
+            if (Physics.Raycast(interact, out hitInfo, 100))
             {
                 #region NPC tag
                 //and if hits info is tagged NPC
@@ -56,6 +59,13 @@ public class PickUp : MonoBehaviour
                 //and if hits info is tagged Item
                 if (hitInfo.collider.CompareTag("Item"))
                 {
+                    //restore health once pick up the item
+                    playerCH.curHealth += 20;
+                    if (playerCH.curHealth > playerCH.maxHealth)
+                    {
+                        playerCH.curHealth = playerCH.maxHealth;
+                    }
+                    Destroy(hitInfo.transform.gameObject);
                     //Debug that we hit an Item
                     Debug.Log("Hit an Item");
                 }
