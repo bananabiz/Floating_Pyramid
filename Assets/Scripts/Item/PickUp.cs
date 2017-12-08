@@ -8,6 +8,8 @@ public class PickUp : MonoBehaviour
     //create two gameobject variables one called player and the other mainCam
     public GameObject player;
     public GameObject mainCam;
+    public GameObject chestBox;
+    private DragAndDropChest dragChest;
     private CharacterHandler playerCH;
 
     void Start()
@@ -20,6 +22,8 @@ public class PickUp : MonoBehaviour
         mainCam = this.gameObject;
 
         playerCH = this.GetComponent<CharacterHandler>();
+        chestBox = GameObject.FindGameObjectWithTag("ChestBox");
+        dragChest = chestBox.GetComponent<DragAndDropChest>();
     }
 
     void Update()
@@ -34,7 +38,7 @@ public class PickUp : MonoBehaviour
             //create hit info
             RaycastHit hitInfo;
             //if this physics raycast hits something within 10 units
-            if (Physics.Raycast(interact, out hitInfo, 100))
+            if (Physics.Raycast(interact, out hitInfo, 10))
             {
                 #region NPC tag
                 //and if hits info is tagged NPC
@@ -68,6 +72,19 @@ public class PickUp : MonoBehaviour
                     Destroy(hitInfo.transform.gameObject);
                     //Debug that we hit an Item
                     Debug.Log("Hit an Item");
+                }
+                #endregion
+
+                #region ChestBox
+                //and if hits info is tagged ChestBox
+                if (hitInfo.collider.CompareTag("ChestBox"))
+                {
+                    //activate a window that shows what's inside ChestBox
+                    //dragChest.showChest = true;
+                    dragChest.ToggleInv();
+                    //Cursor.lockState = CursorLockMode.None;
+                    //Cursor.visible = true;
+                    Debug.Log("Hit a ChestBox");
                 }
                 #endregion
             }
