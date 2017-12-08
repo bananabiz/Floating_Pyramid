@@ -82,7 +82,7 @@ public class CharacterHandler : MonoBehaviour
             //our level goes up by one
             level++;
             //the maximum amount of experience is increased by 50
-            maxExp += 50;
+            maxExp += attackDamage;
         }
 
         if (curHealth < 0)

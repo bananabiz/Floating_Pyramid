@@ -41,6 +41,8 @@ public class CollisionLava : MonoBehaviour
         youDead.SetActive(false);
         startTime.timerCount = startTime.timer;
         playerCH.curHealth = playerCH.maxHealth;
+        playerCH.curMana = playerCH.maxMana;
+        playerCH.curStamina = playerCH.maxStamina;
         player.transform.position = playerSpawn.position;
     }
 }

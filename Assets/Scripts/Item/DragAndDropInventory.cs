@@ -56,7 +56,7 @@ public class DragAndDropInventory : MonoBehaviour
     public void DropItem(int iD)
     {
         droppedItem = Resources.Load("Prefabs/" + ItemGen.CreateItem(iD).Mesh) as GameObject;
-        Instantiate(droppedItem, transform.position + transform.forward * 3, Quaternion.identity);
+        Instantiate(droppedItem, transform.position + transform.forward * 3, Quaternion.Euler(0, 0, 90));
         return;
     }
     #endregion
@@ -191,6 +191,7 @@ public class DragAndDropInventory : MonoBehaviour
         }
         AddItem(0);
         AddItem(2);
+        AddItem(100);
         AddItem(101);
         AddItem(102);
         AddItem(200);

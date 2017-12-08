@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float startHealth = 50;
     public int damage = 10;
     public float deathDelay = 1f;
+    public float adjust = 0.5f;
     public NavMeshAgent nav;
     private Collider enemyCollider;
 
@@ -56,6 +57,26 @@ public class Enemy : MonoBehaviour
         {
             playerCH.curHealth -= damage;
             TakeDamage(playerCH.attackDamage);
+            playerCH.curExp += damage;
+            playerCH.curMana += damage * adjust;
+            if (playerCH.curMana > playerCH.maxMana)
+            {
+                playerCH.curMana = playerCH.maxMana;
+            }
+            if (playerCH.curMana < 0)
+            {
+                playerCH.curMana = 0;
+            }
+
+            if (playerCH.curStamina > playerCH.maxStamina)
+            {
+                playerCH.curStamina = playerCH.maxStamina;
+            }
+            if (playerCH.curStamina < 0)
+            {
+                playerCH.curStamina = 0;
+            }
+            playerCH.curStamina -= damage * adjust;
         }
         else
         {
