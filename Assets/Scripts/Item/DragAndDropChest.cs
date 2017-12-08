@@ -31,7 +31,7 @@ public class DragAndDropChest : MonoBehaviour
     private Rect toolTipRect;
     [Header("References and Locations")]
     public Movement playerMove;
-    public MouseLook mainCam, playerCam;
+    public MouseLook playerCam; //-mainCam
     private float scrW, scrH;
 
 
@@ -39,7 +39,10 @@ public class DragAndDropChest : MonoBehaviour
     {
         scrW = Screen.width / 16;
         scrH = Screen.height / 8;
-        
+        //mainCam = Camera.main.GetComponent<MouseLook>();
+        //playerCam = GetComponent<MouseLook>();
+        //playerMove = GetComponent<Movement>();
+
         playerInv = GameObject.FindGameObjectWithTag("Player").GetComponent<DragAndDropInventory>();
 
         if (size == ChestSize.Small)
@@ -173,7 +176,7 @@ public class DragAndDropChest : MonoBehaviour
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            mainCam.enabled = true;
+            //mainCam.enabled = true;
             playerCam.enabled = true;
             playerMove.enabled = true;
             return (false);
@@ -184,7 +187,7 @@ public class DragAndDropChest : MonoBehaviour
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            mainCam.enabled = false;
+            //mainCam.enabled = false;
             playerCam.enabled = false;
             playerMove.enabled = false;
             return (true);

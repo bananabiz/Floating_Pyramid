@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionLava : MonoBehaviour
 {
@@ -44,5 +45,11 @@ public class CollisionLava : MonoBehaviour
         playerCH.curMana = playerCH.maxMana;
         playerCH.curStamina = playerCH.maxStamina;
         player.transform.position = playerSpawn.position;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 }

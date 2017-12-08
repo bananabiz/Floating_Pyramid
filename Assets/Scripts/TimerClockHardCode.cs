@@ -10,6 +10,8 @@ public class TimerClockHardCode : MonoBehaviour {
     public GUIStyle clock;
     public GameObject player;
     public GameObject youDead;
+    public GameObject youWin;
+    public GameObject winPoint;
     private CharacterHandler playerCH;
 
     // Use this for initialization
@@ -36,6 +38,12 @@ public class TimerClockHardCode : MonoBehaviour {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+        }
+
+        if (player.transform.position == winPoint.transform.position)
+        {
+            Time.timeScale = 0;
+            youWin.SetActive(true); 
         }
 	}
 
